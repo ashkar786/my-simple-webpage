@@ -4,6 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Simple Web Page</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
     <style>
       :root {
         color-scheme: light dark;
@@ -128,6 +137,11 @@
         counterEl.textContent = String(count);
         updateTime();
       });
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("src") === "qr") {
+        gtag("event", "qr_visit", { source: "qr" });
+      }
 
       updateTime();
       setInterval(updateTime, 1000);
