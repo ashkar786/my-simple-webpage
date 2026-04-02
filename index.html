@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simple Web Page</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0b1220;
+        --card: rgba(255, 255, 255, 0.06);
+        --text: #e6edf3;
+        --muted: rgba(230, 237, 243, 0.7);
+        --border: rgba(255, 255, 255, 0.12);
+        --accent: #7aa2ff;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        background: radial-gradient(800px circle at 20% 10%, rgba(122, 162, 255, 0.25), transparent 60%),
+          radial-gradient(700px circle at 90% 20%, rgba(0, 255, 209, 0.15), transparent 55%),
+          var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 720px;
+        border: 1px solid var(--border);
+        background: var(--card);
+        border-radius: 16px;
+        padding: 22px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(8px);
+      }
+
+      h1 {
+        margin: 0 0 8px 0;
+        font-size: 1.5rem;
+        letter-spacing: 0.2px;
+      }
+
+      p {
+        margin: 0 0 16px 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      button {
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: rgba(122, 162, 255, 0.15);
+        color: var(--text);
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-weight: 600;
+      }
+
+      button:hover {
+        background: rgba(122, 162, 255, 0.25);
+      }
+
+      .stat {
+        font-variant-numeric: tabular-nums;
+        padding: 10px 12px;
+        border: 1px dashed var(--border);
+        border-radius: 12px;
+        color: var(--muted);
+      }
+
+      code {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>Welcome</h1>
+      <p>
+        This is a simple standalone web page. Press the button to update a counter and show your local time.
+      </p>
+
+      <div class="row">
+        <button id="btn">Click me</button>
+        <div class="stat">
+          Counter: <code id="counter">0</code>
+        </div>
+        <div class="stat">
+          Time: <code id="time">--:--:--</code>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const counterEl = document.getElementById("counter");
+      const timeEl = document.getElementById("time");
+      const btn = document.getElementById("btn");
+
+      let count = 0;
+
+      function pad2(n) {
+        return String(n).padStart(2, "0");
+      }
+
+      function updateTime() {
+        const now = new Date();
+        const hh = pad2(now.getHours());
+        const mm = pad2(now.getMinutes());
+        const ss = pad2(now.getSeconds());
+        timeEl.textContent = `${hh}:${mm}:${ss}`;
+      }
+
+      btn.addEventListener("click", () => {
+        count += 1;
+        counterEl.textContent = String(count);
+        updateTime();
+      });
+
+      updateTime();
+      setInterval(updateTime, 1000);
+    </script>
+  </body>
+</html>
+
