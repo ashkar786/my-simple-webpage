@@ -140,7 +140,7 @@
 
       const params = new URLSearchParams(window.location.search);
       if (params.get("src") === "qr") {
-        gtag("event", "Barcodeqr_visit", { source: "qr" });
+        gtag("event", "qr_visit", { source: "qr" });
       }
 
       updateTime();
